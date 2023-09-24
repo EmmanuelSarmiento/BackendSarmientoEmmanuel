@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Gaseosa Coca cola",
+    "description": "Gaseosa gasificada con altos porcentajes de azucares agregados",
+    "price": 20000,
+    "thumbnail": "jpg",
+    "code": 255,
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "title": "Gaseosa Pepsi cola",
+    "description": "Gaseosa gasificada con altos porcentajes de azucares agregados",
+    "price": 20,
+    "thumbnail": "jpg",
+    "code": 256,
+    "stock": 10
+  },
+  {
+    "id": 3,
+    "title": "Gaseosa Coca cola",
+    "description": "Gaseosa gasificada con altos porcentajes de azucares agregados",
+    "price": 20000,
+    "thumbnail": "jpg",
+    "code": 255,
+    "stock": 10
+  },
+  {
+    "id": 4,
+    "title": "Gaseosa Pepsi cola",
+    "description": "Gaseosa gasificada con altos porcentajes de azucares agregados",
+    "price": 20,
+    "thumbnail": "jpg",
+    "code": 256,
+    "stock": 10
+  }
+]
