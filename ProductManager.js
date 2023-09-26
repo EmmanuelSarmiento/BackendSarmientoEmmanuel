@@ -13,7 +13,7 @@ class ProductManager {
         return [];
       }
     } catch (error) {
-      throw new Error(error.message);
+      return error;
     }
   }
 
@@ -29,7 +29,7 @@ class ProductManager {
       products.push({ id, ...producto });
       await promises.writeFile(path, JSON.stringify(products)); //sobre escribe el array con la nueva info incluida
     } catch (error) {
-      throw new Error(error.message);
+      return error;
     }
   }
 
@@ -39,7 +39,7 @@ class ProductManager {
       const product = products.filter((p) => p.id === id);
       return product;
     } catch (error) {
-      throw new Error(error.message);
+      return error;
     }
   }
 
@@ -50,7 +50,7 @@ class ProductManager {
       let productMod = [{ id, ...producto }, ...products];
       // console.log(productMod);
     } catch (error) {
-      throw new Error(error.message);
+      return error;
     }
   }
 
@@ -60,7 +60,7 @@ class ProductManager {
       const newArrayProducts = products.filter((p) => p.id !== id);
       await promises.writeFile(path, JSON.stringify(newArrayProducts));
     } catch (error) {
-      throw new Error(error.message);
+      return error;
     }
   }
 }
@@ -110,4 +110,4 @@ const producto3 = {
 
 // test();
 
-export const manager = new ProductManager();
+export const manager = new ProductManager(ProductManager.js);
