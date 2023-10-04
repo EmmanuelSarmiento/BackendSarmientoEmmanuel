@@ -26,8 +26,10 @@ class ProductManager {
       } else {
         id = products[products.length - 1].id + 1;
       }
-      products.push({ id, ...producto });
+      const newProduct = { id, ...producto };
+      products.push(newProduct);
       await promises.writeFile(path, JSON.stringify(products)); //sobre escribe el array con la nueva info incluida
+      return newProduct;
     } catch (error) {
       return error;
     }
@@ -43,12 +45,16 @@ class ProductManager {
     }
   }
 
-  async updateProduct({ id, ...producto }) {
+  async updateProduct(id, obj) {
     try {
       const products = await this.getProducts({});
-      await this.deleteProduct(id);
-      let productMod = [{ id, ...producto }, ...products];
-      // console.log(productMod);
+      const index = products.findIndex((p) => p.id === id);
+      if (index === -1) {
+        return null;
+      }
+      const updateProduct = { ...products[index], ...obj };
+      products.splice(index, 1, updateProduct);
+      await promises.writeFile(path, JSON.stringify(products));
     } catch (error) {
       return error;
     }
@@ -57,8 +63,12 @@ class ProductManager {
   async deleteProduct(id) {
     try {
       const products = await this.getProducts({}); // leer el archivo
-      const newArrayProducts = products.filter((p) => p.id !== id);
-      await promises.writeFile(path, JSON.stringify(newArrayProducts));
+      const product = products.find((p) => p.id === id);
+      if (product) {
+        const newArrayProducts = products.filter((p) => p.id !== id);
+        await promises.writeFile(path, JSON.stringify(newArrayProducts));
+      }
+      return product;
     } catch (error) {
       return error;
     }

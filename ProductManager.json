@@ -34,5 +34,14 @@
     "thumbnail": "jpg",
     "code": 256,
     "stock": 10
+  },
+  {
+    "id": 5,
+    "title": "Cerveza Quilmes Lata",
+    "description": "Cerveza Mendocina",
+    "price": 500,
+    "thumbnail": "jpg",
+    "code": 35,
+    "stock": 155
   }
 ]
