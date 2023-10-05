@@ -1,11 +1,8 @@
-import express from "express";
-import { manager } from "./ProductManager.js";
+import { Router } from "express";
+import { manager } from "../ProductManager.js";
+const router = Router();
 
-const app = express();
-
-app.use(express.json());
-
-app.get("/api/products", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const products = await manager.getProducts(req.query);
     res.status(200).json({ products });
@@ -14,7 +11,7 @@ app.get("/api/products", async (req, res) => {
   }
 });
 
-app.get("/api/products/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const product = await manager.getProductsById(+id);
@@ -27,7 +24,7 @@ app.get("/api/products/:id", async (req, res) => {
   }
 });
 
-app.post("/api/products", async (req, res) => {
+router.post("/", async (req, res) => {
   const { title, description, price, thumbnail, code, stock } = req.body;
   console.log("Body", req.body);
   if (!title || !description || !price || !thumbnail || !code || !stock) {
@@ -41,7 +38,7 @@ app.post("/api/products", async (req, res) => {
   }
 });
 
-app.put("/api/products/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const response = await manager.updateProduct(+id, req.body);
@@ -54,7 +51,7 @@ app.put("/api/products/:id", async (req, res) => {
   }
 });
 
-app.delete("/api/products/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const response = await manager.deleteProduct(+id);
@@ -67,6 +64,4 @@ app.delete("/api/products/:id", async (req, res) => {
   }
 });
 
-app.listen(8080, () => {
-  console.log("Puerto en 8080");
-});
+export default router;

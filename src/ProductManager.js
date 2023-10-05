@@ -13,7 +13,7 @@ class ProductManager {
         return [];
       }
     } catch (error) {
-      return error;
+      throw new Error(error.message);
     }
   }
 
@@ -31,7 +31,7 @@ class ProductManager {
       await promises.writeFile(path, JSON.stringify(products)); //sobre escribe el array con la nueva info incluida
       return newProduct;
     } catch (error) {
-      return error;
+      throw new Error(error.message);
     }
   }
 
@@ -41,7 +41,7 @@ class ProductManager {
       const product = products.filter((p) => p.id === id);
       return product;
     } catch (error) {
-      return error;
+      throw new Error(error.message);
     }
   }
 
@@ -56,7 +56,7 @@ class ProductManager {
       products.splice(index, 1, updateProduct);
       await promises.writeFile(path, JSON.stringify(products));
     } catch (error) {
-      return error;
+      throw new Error(error.message);
     }
   }
 
@@ -70,54 +70,9 @@ class ProductManager {
       }
       return product;
     } catch (error) {
-      return error;
+      throw new Error(error.message);
     }
   }
 }
 
-// Test metodos
-const producto1 = {
-  title: "Gaseosa Coca cola",
-  description: "Gaseosa gasificada con altos porcentajes de azucares agregados",
-  price: 20000,
-  thumbnail: "jpg",
-  code: 255,
-  stock: 10,
-};
-const producto2 = {
-  title: "Gaseosa Pepsi cola",
-  description: "Gaseosa gasificada con altos porcentajes de azucares agregados",
-  price: 20,
-  thumbnail: "jpg",
-  code: 256,
-  stock: 10,
-};
-const producto3 = {
-  id: 5,
-  title: "Gaseosa fanta ",
-  description: "Gaseosa gasificada con bajos porcentajes de azucares agregados",
-  price: 220,
-  thumbnail: "jpg",
-  code: 356,
-  stock: 25,
-};
-
-// async function test() {
-//   const manager = new ProductManager();
-//   /* Agrego productos */
-//   await manager.addProduct(producto2);
-//   const products = await manager.getProducts();
-
-//   /* Veo el arrays vacio o completado */
-//   console.log(products);
-
-//   /* Busco por el id */
-//   // await manager.getProductsById(3);
-
-//   /* Elimino segun el id */
-//   // await manager.deleteProduct(6);
-// }
-
-// test();
-
-export const manager = new ProductManager(ProductManager.js);
+export const manager = new ProductManager();
