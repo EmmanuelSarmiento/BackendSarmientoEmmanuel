@@ -26,7 +26,7 @@ class ProductManager {
       } else {
         id = products[products.length - 1].id + 1;
       }
-      const newProduct = { id, ...producto };
+      const newProduct = { id, ...producto, status: true };
       products.push(newProduct);
       await promises.writeFile(path, JSON.stringify(products)); //sobre escribe el array con la nueva info incluida
       return newProduct;
@@ -38,7 +38,7 @@ class ProductManager {
   async getProductsById(id) {
     try {
       const products = await this.getProducts({});
-      const product = products.filter((p) => p.id === id);
+      const product = products.findd((p) => p.id === id);
       return product;
     } catch (error) {
       throw new Error(error.message);
@@ -75,4 +75,4 @@ class ProductManager {
   }
 }
 
-export const manager = new ProductManager();
+export const productsManager = new ProductManager();
