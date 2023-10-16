@@ -10,12 +10,10 @@ class CartsManager {
         const cartsData = JSON.parse(cartsFile);
         return cartsData;
       } else {
-        console.log("no existe el archivo");
         return [];
       }
     } catch (error) {
-      console.log("error", error);
-      return error;
+      throw new Error(error.message);
     }
   }
   async addCart() {

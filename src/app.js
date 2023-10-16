@@ -22,7 +22,7 @@ app.set("view engine", "handlebars");
 app.use("/api/products", productsRouter);
 app.use("api/carts", cartsRouter);
 app.use("/api/users", usersRouter);
-app.use("/api/views", viewsRouter);
+app.use("/", viewsRouter);
 
 app.listen(8080, () => {
   console.log("Puerto en 8080 en funcionamiento");

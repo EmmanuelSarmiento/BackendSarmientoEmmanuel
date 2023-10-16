@@ -77,7 +77,7 @@ router.post("/signup", async (req, res) => {
   }
   try {
     const response = await manager.createUser(req.body);
-    res.redirect(`/api/views/user/${response.id}`);
+    res.redirect(`/user/${response.id}`);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
