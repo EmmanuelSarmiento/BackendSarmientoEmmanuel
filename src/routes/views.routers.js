@@ -13,8 +13,12 @@ router.get("/user/:idUser", async (req, res) => {
   res.render("profile", { user });
 });
 
-router.get("/", (req, res) => {
-  res.render("websocket");
+router.get("/websocket", (req, res) => {
+  res.render("home");
+});
+
+router.get("/websocketrealtime", (req, res) => {
+  res.render("realTimeProducts");
 });
 
 export default router;

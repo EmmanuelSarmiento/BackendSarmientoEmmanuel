@@ -5,6 +5,7 @@ import usersRouter from "./routes/users.router.js";
 import viewsRouter from "./routes/views.routers.js";
 import { __dirname } from "./utils.js";
 import { engine } from "express-handlebars";
+import { Server } from "socket.io";
 
 const app = express();
 
@@ -22,8 +23,19 @@ app.set("view engine", "handlebars");
 app.use("/api/products", productsRouter);
 app.use("api/carts", cartsRouter);
 app.use("/api/users", usersRouter);
-app.use("/", viewsRouter);
+app.use("/api/views", viewsRouter);
 
-app.listen(8080, () => {
+const httpServer = app.listen(8080, () => {
   console.log("Puerto en 8080 en funcionamiento");
+});
+
+const socketServer = new Server(httpServer);
+socketServer.on("connection", (socket) => {
+  socket.on("disconnect", () => {});
+  socket.on("newPrice", (value) => {
+    socket.broadcast.emit("priceUpdated", value);
+  });
+  socket.on("newPrice2", (value) => {
+    socketServer.emit("priceUpdated2", value);
+  });
 });
