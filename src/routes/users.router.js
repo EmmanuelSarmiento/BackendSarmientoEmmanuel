@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { manager } from "../UserManager.js";
-import { authMiddleware } from "../middleware/auth.middleware.js";
+// import { userMananger } from "../managers/UserManager.js";
+// import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const users = await manager.getUsers(req.query);
+    const users = await userMananger.findAll();
     res.status(200).json({ message: "Users found", users });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -27,18 +28,26 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", authMiddleware, async (req, res) => {
-  const { first_name, last_name, email, password } = req.body;
-  if (!first_name || !last_name || !email || !password) {
-    return res.status(400).json({ message: "Some data is missing" });
-  }
+router.post("/", async (req, res) => {
   try {
-    const response = await manager.createUser(req.body);
-    res.status(200).json({ message: "User created", user: response });
+    const createdUser = await userMananger.createdOne(req.body);
+    res.sendStatus(200).json({ message: "User created", user: createdUser });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+// router.post("/", async (req, res) => {
+//   const { first_name, last_name, email, password } = req.body;
+//   if (!first_name || !last_name || !email || !password) {
+//     return res.status(400).json({ message: "Some data is missing" });
+//   }
+//   try {
+//     const response = await manager.createUser(req.body);
+//     res.status(200).json({ message: "User created", user: response });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 router.delete("/:idUser", async (req, res) => {
   const { idUser } = req.params;

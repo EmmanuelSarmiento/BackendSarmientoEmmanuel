@@ -6,6 +6,7 @@ import viewsRouter from "./routes/views.routers.js";
 import { __dirname } from "./utils.js";
 import { engine } from "express-handlebars";
 import { Server } from "socket.io";
+import "./db/configDB.js";
 
 const app = express();
 
