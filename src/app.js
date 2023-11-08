@@ -1,11 +1,10 @@
 import express from "express";
 import productsRouter from "./routes/products.router.js";
-import cartsRouter from "./routes/carts.router.js";
 import usersRouter from "./routes/users.router.js";
-import viewsRouter from "./routes/views.routers.js";
+import viewsRouter from "./routes/views.router.js";
 import { __dirname } from "./utils.js";
 import { engine } from "express-handlebars";
-import { Server } from "socket.io";
+// import { Server } from "socket.io";
 import "./db/configDB.js";
 
 const app = express();
@@ -22,21 +21,20 @@ app.set("view engine", "handlebars");
 //Routes
 
 app.use("/api/products", productsRouter);
-app.use("api/carts", cartsRouter);
 app.use("/api/users", usersRouter);
-app.use("/api/views", viewsRouter);
+app.use("/", viewsRouter);
 
 const httpServer = app.listen(8080, () => {
   console.log("Puerto en 8080 en funcionamiento");
 });
 
-const socketServer = new Server(httpServer);
-socketServer.on("connection", (socket) => {
-  socket.on("disconnect", () => {});
-  socket.on("newPrice", (value) => {
-    socket.broadcast.emit("priceUpdated", value);
-  });
-  socket.on("newPrice2", (value) => {
-    socketServer.emit("priceUpdated2", value);
-  });
-});
+// const socketServer = new Server(httpServer);
+// socketServer.on("connection", (socket) => {
+//   socket.on("disconnect", () => {});
+//   socket.on("newPrice", (value) => {
+//     socket.broadcast.emit("priceUpdated", value);
+//   });
+//   socket.on("newPrice2", (value) => {
+//     socketServer.emit("priceUpdated2", value);
+//   });
+// });
