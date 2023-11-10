@@ -13,7 +13,7 @@ class UsersManager {
     const response = await usersModel.create(obj);
     return response;
   }
-  async updateOne(id, obje) {
+  async updateOne(id, obj) {
     const response = await usersModel.updateOne({ _id: id }, obj);
     return response;
   }

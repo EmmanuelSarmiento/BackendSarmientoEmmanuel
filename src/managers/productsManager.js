@@ -2,7 +2,7 @@ import { productsModel } from "../db/models/products.model.js";
 
 class ProductsManager {
   async findAll() {
-    const result = await productsModel.find();
+    const result = await productsModel.find().lean();
     return result;
   }
   async findById(id) {

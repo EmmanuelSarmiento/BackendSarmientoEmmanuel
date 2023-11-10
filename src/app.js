@@ -2,6 +2,7 @@ import express from "express";
 import productsRouter from "./routes/products.router.js";
 import usersRouter from "./routes/users.router.js";
 import viewsRouter from "./routes/views.router.js";
+import cartsRouter from "./routes/carts.router.js";
 import { __dirname } from "./utils.js";
 import { engine } from "express-handlebars";
 // import { Server } from "socket.io";
@@ -23,6 +24,7 @@ app.set("view engine", "handlebars");
 app.use("/api/products", productsRouter);
 app.use("/api/users", usersRouter);
 app.use("/", viewsRouter);
+app.use("/api/carts", cartsRouter);
 
 const httpServer = app.listen(8080, () => {
   console.log("Puerto en 8080 en funcionamiento");

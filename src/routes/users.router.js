@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
   }
   try {
     const createdUsers = await usersManager.createOne(req.body);
-    res.status(200).json({ message: "Users created", user: createdUsers });
+    res.redirect(`/home/${createdUsers._id}`);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
