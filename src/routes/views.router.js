@@ -4,6 +4,9 @@ import { productsManager } from "../managers/productsManager.js";
 
 const router = Router();
 
+router.get("/views", (req, res) => {
+  res.render("home");
+});
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
